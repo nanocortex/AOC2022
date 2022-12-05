@@ -77,23 +77,24 @@ public sealed class Day05 : BaseDay
 {
     private readonly List<Instruction> _instructions;
     private readonly string[] _input;
+    private const int CratesSize = 9;
 
     public Day05()
     {
         _input = File.ReadAllLines(InputFilePath);
-        _instructions = _input.Skip(10).Select(Instruction.FromString).ToList();
+        _instructions = _input.Skip(CratesSize + 1).Select(Instruction.FromString).ToList();
     }
 
     public override ValueTask<string> Solve_1()
     {
-        var cargo = new Cargo(_input.Take(9).ToArray());
+        var cargo = new Cargo(_input.Take(CratesSize).ToArray());
         cargo.ApplyInstructions(_instructions);
         return new ValueTask<string>($"{cargo.GetTopCrates()}");
     }
 
     public override ValueTask<string> Solve_2()
     {
-        var cargo = new Cargo(_input.Take(9).ToArray());
+        var cargo = new Cargo(_input.Take(CratesSize).ToArray());
         cargo.ApplyInstructions2(_instructions);
         return new ValueTask<string>($"{cargo.GetTopCrates()}");
     }
